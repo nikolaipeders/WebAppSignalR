@@ -34,6 +34,7 @@ public partial class HistoryViewModel : BaseViewModel
 	[ObservableProperty]
 	public string wins = string.Empty;
 
+
 	[ObservableProperty]
 	public string losses = string.Empty;
 

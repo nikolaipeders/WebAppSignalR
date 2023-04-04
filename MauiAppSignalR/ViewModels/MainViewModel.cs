@@ -104,6 +104,8 @@ public partial class MainViewModel : BaseViewModel
         }
     }
 
+        }
+    }
 
     [RelayCommand]
     private void MakeMove(string parameter)
