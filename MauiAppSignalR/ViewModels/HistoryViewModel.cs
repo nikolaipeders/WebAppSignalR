@@ -1,22 +1,53 @@
-﻿namespace MauiAppSignalR.ViewModels;
+﻿using MauiAppSignalR.Models;
+using MauiAppSignalR.Services;
+using Realms;
+
+namespace MauiAppSignalR.ViewModels;
 
 public partial class HistoryViewModel : BaseViewModel
 {
-	int count = 0;
+    private Realm _realm;
+    private Player _player;
+
+    public HistoryViewModel()
+    {
+        _realm = Realm.GetInstance();
+        _player = _realm.All<Player>().FirstOrDefault();
+        Refresh();
+
+        // Subscribe to the PlayerScoreUpdated event
+        SaveScoreEventHandler.Instance.PlayerScoreUpdated += OnPlayerScoreUpdated;
+    }
+
+    // ...
+
+    private void OnPlayerScoreUpdated(object sender, EventArgs e)
+    {
+        // Call the Refresh method to update the UI
+        Refresh();
+    }
+
+
+    [ObservableProperty]
+	public string refreshButtonText = "Refresh";
 
 	[ObservableProperty]
-	public string message = "Click me";
+	public string wins = string.Empty;
 
-	[RelayCommand]
-	private void OnCounterClicked()
+	[ObservableProperty]
+	public string losses = string.Empty;
+
+    [RelayCommand]
+	private void Refresh()
 	{
-		count++;
+        var realm = Realm.GetInstance();
 
-		if (count == 1)
-			Message = $"Clicked {count} time";
-		else
-			Message = $"Clicked {count} times";
+        var player = realm.All<Player>().FirstOrDefault();
 
-		SemanticScreenReader.Announce(Message);
-	}
+        if (player != null)
+        {
+			Wins = $"Wins: {player.Wins}";
+            Losses = $"Wins: {player.Losses}";
+        }
+    }
 }

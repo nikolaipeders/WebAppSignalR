@@ -11,29 +11,25 @@
 			Padding="30,0"
 			VerticalOptions="Center">
 
-			<Image
-				Source="dotnet_bot.png"
-				SemanticProperties.Description="Cute dot net bot waving hi to you!"
-				HeightRequest="200"
-				HorizontalOptions="Center" />
-
 			<Label
-				Text="Hello, World!"
+				Text="History"
 				SemanticProperties.HeadingLevel="Level1"
 				FontSize="32"
 				HorizontalOptions="Center" />
 
 			<Label
-				Text="Welcome to .NET Multi-platform App UI"
-				SemanticProperties.HeadingLevel="Level2"
-				SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+				Text="{Binding Wins}"
 				FontSize="18"
 				HorizontalOptions="Center" />
 
-			<Button
-				Text="{Binding Message}"
-				SemanticProperties.Hint="Counts the number of times you click"
-				Command="{Binding CounterClickedCommand}"
+            <Label
+				Text="{Binding Losses}"
+				FontSize="18"
+				HorizontalOptions="Center" />
+
+            <Button
+				Text="{Binding RefreshButtonText}"
+				Command="{Binding RefreshCommand}"
 				HorizontalOptions="Center" />
 
 		</VerticalStackLayout>

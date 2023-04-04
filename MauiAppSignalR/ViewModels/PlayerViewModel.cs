@@ -31,7 +31,7 @@ public partial class PlayerViewModel : BaseViewModel
 
         var player = realm.All<Player>().FirstOrDefault();
 
-        if (player == null)
+        if (player != null)
         {
             player = new Player { Name = nameInput };
             realm.Write(() =>
